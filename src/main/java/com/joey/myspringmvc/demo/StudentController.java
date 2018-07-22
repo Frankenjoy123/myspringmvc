@@ -19,6 +19,8 @@ public class StudentController {
     @MyRequestMapping("/detail")
     public String getDetail(@MyRequestParam Integer id){
 
+        System.out.println(studentSerice.getDetail(id));
+
         return studentSerice.getDetail(id);
 
     }
