@@ -46,17 +46,21 @@ public class MyDispatchServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
 
         //1.加载配置文件
+        //1.定位
         doLoadConfig(config.getInitParameter("contextConfigLocation"));
 
         //2.初始化所有相关联的类,扫描用户设定的包下面所有的类
+        //2.加载
         doScanner(properties.getProperty("scanPackage"));
 
         System.out.println("classNames :" + classNames.toString());
 
         //3. IOC 拿到扫描到的类,通过反射机制,实例化,并且放到ioc容器中(k-v  beanName-bean) beanName默认是首字母小写
+        //3.注册
         doInstance();
 
         //4 DI 依赖注入
+        //4. 对应Spring源码 getBean方法
         try {
             doDependInject();
         } catch (IllegalAccessException e) {
